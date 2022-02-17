@@ -1,4 +1,4 @@
-## Getting started:
+## Getting started (backend):
 
 1. Ensure you have python 3.9 installed on your machine
 2. Create a virtual environment using `python -m venv venv`
@@ -13,3 +13,4 @@
 
 - You can sort your python imports using `isort --recursive .`
 - Use the `REST Client` vscode extension by Huachao Mao for API testing (as an alternative to Postman)
+- I suggest using the `Vetur` vscode extension by Pine Wu for help with Vue development.
