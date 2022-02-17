@@ -12,4 +12,14 @@ urlpatterns = [
         question_views.AnswerCreateAPIView.as_view(),
         name="answer-create",
     ),
+    path(
+        "questions/<slug:slug>/answers/",
+        question_views.AnswerListAPIView.as_view(),
+        name="answer-list",
+    ),
+    path(
+        "answers/<uuid:uuid>/",
+        question_views.AnswerRetrieveUpdateDestroyAPIView.as_view(),
+        name="answer-detail",
+    ),
 ]

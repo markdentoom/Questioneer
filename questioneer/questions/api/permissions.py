@@ -7,4 +7,4 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
             return True
         return obj.author == request.user
 
-        # TODO can admins change anyones text?
+        # TODO make admins able to change anyones text

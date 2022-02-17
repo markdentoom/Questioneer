@@ -29,3 +29,23 @@ class AnswerCreateAPIView(generics.CreateAPIView):
         if question.answers.filter(author=request_user).exists():
             raise ValidationError("You have already answered this question")
         serializer.save(author=request_user, question=question)
+
+
+class AnswerRetrieveUpdateDestroyAPIView(
+    generics.RetrieveUpdateDestroyAPIView
+):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    lookup_field = "uuid"
+
+
+class AnswerListAPIView(generics.ListAPIView):
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        slug_kwarg = self.kwargs.get("slug")
+        return Answer.objects.filter(question__slug=slug_kwarg).order_by(
+            "-created_at"
+        )
