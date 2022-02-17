@@ -5,4 +5,11 @@ from questions.api import views as question_views
 router = DefaultRouter()
 router.register(r"questions", question_views.QuestionViewSet)
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("", include(router.urls)),
+    path(
+        "questions/<slug:slug>/answer/",
+        question_views.AnswerCreateAPIView.as_view(),
+        name="answer-create",
+    ),
+]
