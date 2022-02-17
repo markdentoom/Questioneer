@@ -22,4 +22,9 @@ urlpatterns = [
         question_views.AnswerRetrieveUpdateDestroyAPIView.as_view(),
         name="answer-detail",
     ),
+    path(
+        "answers/<uuid:uuid>/like/",
+        question_views.AnswerLikeAPIView.as_view(),
+        name="answer-like",
+    ),
 ]

@@ -1,10 +1,12 @@
 from questions.api.permissions import IsAuthorOrReadOnly
 from questions.api.serializers import AnswerSerializer, QuestionSerializer
 from questions.models import Answer, Question
-from rest_framework import generics, viewsets
+from rest_framework import generics, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -49,3 +51,25 @@ class AnswerListAPIView(generics.ListAPIView):
         return Answer.objects.filter(question__slug=slug_kwarg).order_by(
             "-created_at"
         )
+
+
+class AnswerLikeAPIView(APIView):
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, uuid):
+        return self.post_or_delete(request, uuid)
+
+    def delete(self, request, uuid):
+        return self.post_or_delete(request, uuid, remove=True)
+
+    def post_or_delete(self, request, uuid, remove=False):
+        answer = get_object_or_404(Answer, uuid=uuid)
+        if remove:
+            answer.voters.remove(request.user)
+        else:
+            answer.voters.add(request.user)
+        answer.save()
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(answer, context=serializer_context)
+        return Response(serializer.data, status=status.HTTP_200_OK)

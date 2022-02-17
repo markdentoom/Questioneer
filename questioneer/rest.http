@@ -2,7 +2,7 @@
 @username=new_user
 @email=new@user.com
 @password=new_user_password
-@token=4a52034249775442113246ca81f7f185a3365abc
+@token=80d0cc03cc99e5157dda72495da4c23e34da7aaf
 
 ### Create new account
 POST {{host}}/auth/users/
@@ -29,3 +29,18 @@ Content-Type: application/json
 ### Logout
 POST {{host}}/auth/token/logout/
 Authorization: token {{token}}
+
+
+### Create new question
+POST {{host}}/auth/token/logout/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "content": "Is this question the best test one ever asked!?"
+}
+
+
+### Get question list
+GET {{host}}/api/questions/
+Authorization: Token {{token}}
