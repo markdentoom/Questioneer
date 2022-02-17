@@ -12,3 +12,4 @@
 ## For developers:
 
 - You can sort your python imports using `isort --recursive .`
+- Use the `REST Client` vscode extension by Huachao Mao for API testing (as an alternative to Postman)
