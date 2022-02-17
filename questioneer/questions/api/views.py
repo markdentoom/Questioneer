@@ -1,10 +1,10 @@
-from rest_framework import generics, viewsets
-from questions.models import Answer, Question
-from questions.api.serializers import AnswerSerializer, QuestionSerializer
-from rest_framework.permissions import IsAuthenticated
 from questions.api.permissions import IsAuthorOrReadOnly
-from rest_framework.generics import get_object_or_404
+from questions.api.serializers import AnswerSerializer, QuestionSerializer
+from questions.models import Answer, Question
+from rest_framework import generics, viewsets
 from rest_framework.exceptions import ValidationError
+from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
