@@ -2,7 +2,9 @@
 @username=new_user
 @email=new@user.com
 @password=new_user_password
-@token=80d0cc03cc99e5157dda72495da4c23e34da7aaf
+@token=9f7e43a962971d7c9e77a0a500215390d02f8046
+@question_slug=why-are-we-still-here-CZMejmOj
+
 
 ### Create new account
 POST {{host}}/auth/users/
@@ -31,16 +33,24 @@ POST {{host}}/auth/token/logout/
 Authorization: token {{token}}
 
 
+### Get question list
+GET {{host}}/api/v1/questions/
+Authorization: token {{token}}
+
+
 ### Create new question
-POST {{host}}/auth/token/logout/
+POST {{host}}/api/v1/questions/
 Content-Type: application/json
-Authorization: Token {{token}}
+Authorization: token {{token}}
 
 {
-    "content": "Is this question the best test one ever asked!?"
+    "content": "Why are we still here?"
 }
 
 
-### Get question list
-GET {{host}}/api/questions/
-Authorization: Token {{token}}
+### View question
+GET {{host}}/api/v1/questions/{{question_slug}}/
+Authorization: token {{token}}
+
+
+### TODO expand endpoint tests here
