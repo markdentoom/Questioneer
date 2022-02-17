@@ -26,7 +26,7 @@ class Answer(TimeStampedModel):
     )
     body = models.TextField()
     question = models.ForeignKey(
-        Question, on_delete=models.CASCADE, related_name="questions"
+        Question, on_delete=models.CASCADE, related_name="answers"
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
