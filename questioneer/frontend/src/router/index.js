@@ -7,6 +7,12 @@ const routes = [
     name: "home",
     component: Home,
   },
+  {
+    // TODO make this point to the right place
+    path: "/",
+    name: "question-editor",
+    component: Home,
+  },
   // TODO remove this code later
   // {
   //   path: "/about",
