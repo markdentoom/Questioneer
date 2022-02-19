@@ -7,6 +7,29 @@
         Posted by <span class="question-author">{{ question.author }}</span>
       </p>
       <p>{{ question.created_at }}</p>
+
+      <div v-if="userHasAnswered">
+        <p class="answer-added">You have already given an answer</p>
+      </div>
+      <div v-else-if="showForm">
+        <form @submit.prevent="onSubmit">
+          <p>Answer question</p>
+          <textarea
+            v-model="newAnswerBody"
+            class="form-control"
+            placeholder="Share your knowledge!"
+            rows="10"
+          />
+          <button type="submit" class="btn btn-success my-3">Submit</button>
+        </form>
+        <p v-if="error" class="error mt-2">{{ error }}</p>
+      </div>
+      <div v-else>
+        <button class="btn btn-success" @click="showForm = true">
+          Answer question
+        </button>
+      </div>
+
       <hr />
     </div>
 
@@ -55,6 +78,10 @@ export default {
       answers: [],
       next: null,
       loadingAnswers: false,
+      userHasAnswered: false,
+      showForm: false,
+      newAnswerBody: null,
+      error: null,
     };
   },
   methods: {
@@ -67,6 +94,7 @@ export default {
         const response = await axios.get(endpoint);
         const data = response.data;
         this.question = data;
+        this.userHasAnswered = data.user_has_answered;
         this.setPageTitle(data.content);
       } catch (e) {
         console.log(e.response);
@@ -93,6 +121,27 @@ export default {
         console.log(e.response);
       }
     },
+    async onSubmit() {
+      if (!this.newAnswerBody) {
+        this.error = "Please fill out an answer";
+        return;
+      }
+      const endpoint = `/api/v1/questions/${this.slug}/answer/`;
+      try {
+        const response = await axios.post(endpoint, {
+          body: this.newAnswerBody,
+        });
+        this.answers.unshift(response.data);
+        this.newAnswerBody = null;
+        this.showForm = false;
+        this.userHasAnswered = true;
+        if (this.error) {
+          this.error = null;
+        }
+      } catch (e) {
+        console.log(e.response);
+      }
+    },
   },
   created() {
     this.getQuestionData();
@@ -109,5 +158,9 @@ export default {
 .error {
   font-weight: bold;
   color: #dc3545;
+}
+.answer-added {
+  font-weight: bold;
+  color: green;
 }
 </style>
