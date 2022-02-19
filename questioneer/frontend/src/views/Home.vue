@@ -28,7 +28,7 @@
           @click="getQuestions"
           class="btn btn-sm btn-outline-success"
         >
-          More questions
+          Load more
         </button>
       </div>
     </div>
