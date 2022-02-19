@@ -1,10 +1,10 @@
 <template>
   <div class="Home mt-3">
     <div class="container">
-      <div v-for="question in this.questions" :key="question.pk">
+      <div v-for="question in this.questions" :key="question.uuid">
         <div class="card shadow p-2 mb-4 bg-body rounded">
           <div class="card-body">
-            <p class="mb-0">
+            <p class="mb-1">
               Posted by
               <span class="question-author">{{ question.author }}</span>
             </p>
@@ -33,7 +33,7 @@ export default {
       let endpoint = "/api/v1/questions/";
       try {
         const response = await axios.get(endpoint);
-        this.questions = response.data;
+        this.questions = response.data.results;
       } catch (error) {
         console.log(error.response);
       }

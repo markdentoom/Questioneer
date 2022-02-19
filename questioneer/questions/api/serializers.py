@@ -11,7 +11,8 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        exclude = ["updated_at"]
+        # Exclude ID for security purposes. We use UUID as identifier instead.
+        exclude = ["id", "updated_at"]
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")

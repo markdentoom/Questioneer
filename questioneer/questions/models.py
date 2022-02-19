@@ -6,6 +6,7 @@ from django.db import models
 
 
 class Question(TimeStampedModel):
+    uuid = models.UUIDField(editable=False, default=uuid_lib.uuid4)
     content = models.CharField(max_length=240)
     # 15 characters more than content so we can add a unique random identifier at the end
     slug = models.SlugField(max_length=255, unique=True)
