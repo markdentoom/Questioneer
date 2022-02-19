@@ -1,13 +1,17 @@
 <template>
-  <div class="Home">
-    <h1>Homepage</h1>
-    <button @click="getQuestions">Load questions</button>
-    <div v-for="question in this.questions" v-bind:key="question.id">
-      <div class="card-item">
-        <p>{{ question.author }}</p>
-        <p>{{ question.created_at }}</p>
-        <p>{{ question.content }}</p>
-        <hr />
+  <div class="Home mt-3">
+    <div class="container">
+      <div v-for="question in this.questions" :key="question.pk">
+        <div class="card shadow p-2 mb-4 bg-body rounded">
+          <div class="card-body">
+            <p class="mb-0">
+              Posted by
+              <span class="question-author">{{ question.author }}</span>
+            </p>
+            <h2>{{ question.content }}</h2>
+            <p class="mb-0">{{ question.answers_count }} answers</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -24,17 +28,27 @@ export default {
     };
   },
   methods: {
+    // Function to populate questions array
     async getQuestions() {
       let endpoint = "/api/v1/questions/";
       try {
         const response = await axios.get(endpoint);
         this.questions = response.data;
-        console.log(this.questions);
       } catch (error) {
         console.log(error.response);
-        // alert(error.response.statusText);
       }
     },
   },
+  created() {
+    // Call getQuestions before the page is visible
+    this.getQuestions();
+  },
 };
 </script>
+
+<style>
+.question-author {
+  font-weight: bold;
+  color: #dc3545;
+}
+</style>
