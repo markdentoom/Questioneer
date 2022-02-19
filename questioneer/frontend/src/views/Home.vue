@@ -13,6 +13,16 @@
           </div>
         </div>
       </div>
+      <div class="my-4">
+        <p v-show="loadingQuestions">Loading...</p>
+        <button
+          v-show="next"
+          @click="getQuestions"
+          class="btn btn-sm btn-outline-success"
+        >
+          More questions
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -25,15 +35,28 @@ export default {
   data() {
     return {
       questions: [],
+      next: null,
+      loadingQuestions: false,
     };
   },
   methods: {
     // Function to populate questions array
     async getQuestions() {
       let endpoint = "/api/v1/questions/";
+      if (this.next) {
+        endpoint = this.next;
+      }
+      this.loadingQuestions = true;
       try {
         const response = await axios.get(endpoint);
-        this.questions = response.data.results;
+        const data = response.data;
+        this.questions.push(...data.results);
+        this.loadingQuestions = false;
+        if (data.next) {
+          this.next = data.next;
+        } else {
+          this.next = null;
+        }
       } catch (error) {
         console.log(error.response);
       }
