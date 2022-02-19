@@ -13,16 +13,16 @@ const routes = [
     name: "question-editor",
     component: Home,
   },
-  // TODO remove this code later
-  // {
-  //   path: "/about",
-  //   name: "about",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  // },
+  {
+    path: "/question/:slug",
+    name: "question",
+    // route level code-splitting
+    // this generates a separate chunk (questioneer.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "questioneer" */ "../views/Question.vue"),
+    props: true,
+  },
 ]
 
 const router = createRouter({

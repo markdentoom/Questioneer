@@ -8,11 +8,19 @@
               Posted by
               <span class="question-author">{{ question.author }}</span>
             </p>
-            <h2>{{ question.content }}</h2>
+            <h2>
+              <router-link
+                :to="{ name: 'question', params: { slug: question.slug } }"
+                class="question-link"
+              >
+                {{ question.content }}
+              </router-link>
+            </h2>
             <p class="mb-0">{{ question.answers_count }} answers</p>
           </div>
         </div>
       </div>
+
       <div class="my-4">
         <p v-show="loadingQuestions">Loading...</p>
         <button
@@ -57,12 +65,13 @@ export default {
         } else {
           this.next = null;
         }
-      } catch (error) {
-        console.log(error.response);
+      } catch (e) {
+        console.log(e.response);
       }
     },
   },
   created() {
+    document.title = "Questioneer";
     // Call getQuestions before the page is visible
     this.getQuestions();
   },
@@ -73,5 +82,13 @@ export default {
 .question-author {
   font-weight: bold;
   color: #dc3545;
+}
+.question-link {
+  font-weight: 400;
+  color: black;
+  text-decoration: none;
+}
+.question-link:hover {
+  color: #343a40;
 }
 </style>
