@@ -6,8 +6,8 @@ A reddit-like forum for posting questions built using Django REST and Vue.
 
 1. Create a virtual environment using `python -m venv venv`
 2. Activate it using `venv/scripts/activate`
-3. In your terminal navigate to the `.../questioneer/questioneer` folder
-4. Install backend requirements using `pip install -r requirements.txt`
+3. Install backend requirements using `pip install -r requirements.txt`
+4. In your terminal navigate to the `.../questioneer/questioneer` folder
 5. Run migrations using `python manage.py migrate`
 6. Run the backend server using `python manage.py runserver`
 7. Open a new terminal and navigate to the `.../questioneer/questioneer/frontend` folder
