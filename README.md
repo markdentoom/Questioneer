@@ -18,8 +18,16 @@ A reddit-like forum for posting questions built using Django REST and Vue.
 ## Notable features
 
 ### Hot reloading for development
+![image](https://user-images.githubusercontent.com/59030690/155032168-f24a5d50-6135-42f4-b68d-1404ba322921.png)
 
 ### API testing using `REST Client`
+![image](https://user-images.githubusercontent.com/59030690/155032500-4a172b80-a5b2-4e9a-938a-719c612d6078.png)
+
+### Account creation and login
+![image](https://user-images.githubusercontent.com/59030690/155032064-f36e7502-2cb2-4ed9-86da-ccdf4db06c2a.png)
+
+### Standard CRUD functionality for questions and answers with authentication and pagination
+![image](https://user-images.githubusercontent.com/59030690/155032632-4ef012db-dfa5-40a5-805a-807b3ee038b9.png)
 
 ## Built using
 
