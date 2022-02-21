@@ -20,6 +20,12 @@ import { axios } from "@/common/api.service.js";
 
 export default {
   name: "QuestionEditor",
+  props: {
+    slug: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       questionBody: null,
@@ -30,6 +36,10 @@ export default {
     async performNetworkRequest() {
       let endpoint = "/api/v1/questions/";
       let method = "POST";
+      if (this.slug !== undefined && this.slug !== "") {
+        endpoint += `${this.slug}/`;
+        method = "PUT";
+      }
       try {
         const response = await axios({
           method: method,
@@ -55,6 +65,22 @@ export default {
         this.performNetworkRequest();
       }
     },
+  },
+  created() {
+    document.title = "Editor - QuestionTime";
+  },
+  async beforeRouteEnter(to, from, next) {
+    if (to.params.slug !== undefined && to.params.slug !== "") {
+      const endpoint = `/api/v1/questions/${to.params.slug}/`;
+      try {
+        const response = await axios.get(endpoint);
+        return next((vm) => (vm.questionBody = response.data.content));
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      return next();
+    }
   },
 };
 </script>

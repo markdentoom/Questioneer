@@ -8,9 +8,10 @@ const routes = [
     component: Home,
   },
   {
-    path: "/ask/",
+    path: "/ask/:slug?",
     name: "question-editor",
     component: () => import("../views/QuestionEditor.vue"),
+    props: true,
   },
   {
     path: "/question/:slug",
