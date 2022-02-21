@@ -43,7 +43,9 @@
       <AnswerComponent
         v-for="answer in answers"
         :answer="answer"
+        :requestUser="requestUser"
         :key="answer.uuid"
+        @delete-answer="deleteAnswer"
       />
       <div class="my-4">
         <p v-show="loadingAnswers">Loading...</p>
@@ -153,6 +155,17 @@ export default {
         }
       } catch (e) {
         console.log(e.response);
+      }
+    },
+    async deleteAnswer(answer) {
+      const endpoint = `/api/v1/answers/${answer.uuid}/`;
+      try {
+        await axios.delete(endpoint);
+        this.answers.splice(this.answers.indexOf(answer), 1);
+        this.userHasAnswered = false;
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
       }
     },
   },
