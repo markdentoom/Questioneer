@@ -13,7 +13,7 @@
 
 ## Running the project
 
-1. Run the frontend server using `(venv) PS ...\questioneer\questioneer\frontend> npm run serve`
+1. Run the frontend server using `PS ...\questioneer\questioneer\frontend> npm run serve`
 2. In a separate terminal run the backend server using `(venv) PS ...\questioneer\questioneer> python manage.py runserver`
 3. Click the url in your terminal (http://127.0.0.1:8000/) to open the project in your browser
 
@@ -30,4 +30,4 @@
 - `VueJS` for the frontend
 - `Webpack` for TODO
 - `Axios` for network requests
-- `REST` Client for API testing
+- `REST Client` for API testing

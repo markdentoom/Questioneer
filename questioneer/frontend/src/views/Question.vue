@@ -9,7 +9,7 @@
       <p>{{ question.created_at }}</p>
 
       <div v-if="userHasAnswered">
-        <p class="answer-added">You have already given an answer</p>
+        <p class="answer-added">You have already answered this question</p>
       </div>
       <div v-else-if="showForm">
         <form @submit.prevent="onSubmit">

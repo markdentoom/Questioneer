@@ -8,10 +8,9 @@ const routes = [
     component: Home,
   },
   {
-    // TODO make this point to the right place
-    path: "/",
+    path: "/ask/",
     name: "question-editor",
-    component: Home,
+    component: () => import("../views/QuestionEditor.vue"),
   },
   {
     path: "/question/:slug",
