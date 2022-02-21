@@ -61,7 +61,6 @@ export default {
       } else if (this.questionBody.length > 240) {
         this.error = "Ensure this field has no more than 240 characters";
       } else {
-        console.log("YEEEEEEE");
         this.performNetworkRequest();
       }
     },
