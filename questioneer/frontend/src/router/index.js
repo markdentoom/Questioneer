@@ -10,18 +10,31 @@ const routes = [
   {
     path: "/ask/:slug?",
     name: "question-editor",
-    component: () => import("../views/QuestionEditor.vue"),
+    // route level code-splitting
+    // this generates a separate chunk (questioneer.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "questioneer" */ "../views/QuestionEditor.vue"
+      ),
     props: true,
   },
   {
     path: "/question/:slug",
     name: "question",
-    // route level code-splitting
-    // this generates a separate chunk (questioneer.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "questioneer" */ "../views/Question.vue"),
+    component: () => import("../views/Question.vue"),
     props: true,
+  },
+  {
+    path: "/answer/:uuid",
+    name: "answer-editor",
+    component: () => import("../views/AnswerEditor.vue"),
+    props: true,
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "page-not-found",
+    component: () => import("../views/NotFound.vue"),
   },
 ]
 
